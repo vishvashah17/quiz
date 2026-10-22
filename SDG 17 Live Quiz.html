@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>SDG 17 — Partnerships for the Goals | Executive Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<!-- GSAP (GreenSock Animation Platform) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<style>
+/* ==========================================================================
+   DESIGN TOKENS & SYSTEM VARIABLES (SHARP, EXECUTIVE, CREAM & WHITE AESTHETICS)
+   SDG 17 Primary Brand Color: #19486A (UN Deep Marine Navy)
+   ========================================================================== */
+:root, :root[data-theme="light"] {
+  --sdg17-navy: #19486A;
+  --sdg17-light: #245D86;
+  --sdg17-bright: #0284C7;
+  
+  /* Luxurious Cream & White Palette */
+  --bg: #FAF7F2; /* Warm, rich museum-grade ivory cream */
+  --bg-gradient: radial-gradient(circle at 50% 0%, #F2EBE0 0%, #FAF7F2 70%);
+  --surface: #FFFFFF; /* Pure crisp architectural white panels */
+  --surface-alt: #FCFAF6; /* Ultra-light warm ivory */
+  --surface-hover: #F4ECE0; /* Warm almond/sand cream on hover */
+  --surface-active: #EDE2D1;
+  --border: #E8E1D3; /* Elegant warm stone/cream hairline border */
+  --border-light: #D6CCBA;
+  --border-accent: #19486A;
+  
+  --ink: #0F172A; /* Sharp deep navy-charcoal ink */
+  --ink-secondary: #475569; /* Balanced neutral slate */
+  --ink-muted: #828F9E; /* Warm stone caption text */
+  
+  --accent: #19486A;
+  --accent-glow: rgba(25, 72, 106, 0.12);
+  
+  --ok: #15803D; /* Deep forest emerald */
+  --ok-bg: #F0FDF4; /* Crisp mint cream */
+  --ok-border: #16A34A;
+  
+  --bad: #BE123C; /* Crisp ruby crimson */
+  --bad-bg: #FFF1F2; /* Soft rose cream */
+  --bad-border: #E11D48;
+  
+  --gold: #B45309; /* Warm polished amber bronze */
+  --gold-bg: #FEF3C7;
+  
+  --panel-shadow: 0 16px 42px rgba(60, 45, 30, 0.06), 0 2px 8px rgba(60, 45, 30, 0.04);
+  --btn-shadow: 0 4px 16px rgba(25, 72, 106, 0.28);
+  
+  --font-main: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --sdg17-navy: #19486A;
+  --sdg17-light: #2D6B96;
+  --sdg17-bright: #38BDF8;
+  
+  /* Dark Midnight Navy */
+  --bg: #070D14;
+  --bg-gradient: radial-gradient(circle at 50% 0%, #0F2338 0%, #070D14 75%);
+  --surface: #0B1522;
+  --surface-alt: #101E30;
+  --surface-hover: #16283F;
+  --surface-active: #1D3452;
+  --border: #1E334D;
+  --border-light: #2A476A;
+  --border-accent: #38BDF8;
+  
+  --ink: #F1F5F9;
+  --ink-secondary: #94A3B8;
+  --ink-muted: #64748B;
+  
+  --accent: #19486A;
+  --accent-glow: rgba(56, 189, 248, 0.15);
+  
+  --ok: #10B981;
+  --ok-bg: rgba(16, 185, 129, 0.12);
+  --ok-border: #059669;
+  
+  --bad: #F43F5E;
+  --bad-bg: rgba(244, 63, 94, 0.12);
+  --bad-border: #E11D48;
+  
+  --gold: #F59E0B;
+  --gold-bg: rgba(245, 158, 11, 0.12);
+  
+  --panel-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+  --btn-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  
+  color-scheme: dark;
+}
+
+/* ==========================================================================
+   RESET & STRICT SHARP GEOMETRY (0px BORDER-RADIUS EVERYWHERE)
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border-radius: 0 !important; /* Strict sharp corners */
+}
+
+html, body {
+  min-height: 100%;
+}
+
+body {
+  background: var(--bg);
+  background-image: var(--bg-gradient);
+  background-attachment: fixed;
+  color: var(--ink);
+  font-family: var(--font-main);
+  line-height: 1.5;
+  padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Subtle architectural grid pattern overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(140, 115, 80, 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(140, 115, 80, 0.06) 1px, transparent 1px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+:root[data-theme="dark"] body::before {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+}
+
+/* ==========================================================================
+   LAYOUT STRUCTURE
+   ========================================================================== */
+.app-container {
+  max-width: 1280px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 32px 36px 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Architectural Crosshair Decorator */
+.crosshair-corner {
+  position: relative;
+}
+.crosshair-corner::before,
+.crosshair-corner::after {
+  content: "+";
+  position: absolute;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  opacity: 0.6;
+  pointer-events: none;
+  line-height: 1;
+}
+.crosshair-corner::before { top: -7px; left: -5px; }
+.crosshair-corner::after { bottom: -7px; right: -5px; }
+
+/* ==========================================================================
+   HEADER / EXECUTIVE BRANDING BAR
+   ========================================================================== */
+.brand-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
+.brand-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sdg-badge {
+  background: var(--sdg17-navy);
+  color: #FFFFFF;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  padding: 6px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sdg-badge span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  background: var(--sdg17-bright);
+}
+
+.brand-title {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title h1 {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.8vw, 22px);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  line-height: 1.2;
+}
+
+.brand-title p {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.btn-icon {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 8px 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  text-transform: uppercase;
+}
+
+.btn-icon:hover {
+  background: var(--surface-hover);
+  color: var(--ink);
+  border-color: var(--border-light);
+}
+
+.btn-icon:focus-visible {
+  outline: 2px solid var(--border-accent);
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   METRICS & PROGRESS TRACKER STRIP
+   ========================================================================== */
+.metrics-strip {
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 24px;
+  padding: 14px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.metric-cell {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--font-mono);
+}
+
+.metric-label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: var(--ink-muted);
+  text-transform: uppercase;
+}
+
+.metric-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.metric-value.highlight {
+  color: var(--sdg17-bright);
+}
+
+/* Precision Hairline Progress Bar */
+.progress-rail {
+  position: relative;
+  width: 100%;
+  height: 6px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.progress-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0%;
+  background: linear-gradient(90deg, var(--sdg17-navy), var(--sdg17-bright));
+  transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ==========================================================================
+   DIFFICULTY FILTERS (EXECUTIVE SEGMENTED SWITCH)
+   ========================================================================== */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.filter-group {
+  display: inline-flex;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 3px;
+  gap: 3px;
+}
+
+.filter-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 7px 18px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.filter-btn:hover:not([aria-pressed="true"]) {
+  color: var(--ink);
+  background: var(--surface-hover);
+}
+
+.filter-btn[aria-pressed="true"] {
+  background: var(--sdg17-navy);
+  color: #FFFFFF;
+  border-color: var(--sdg17-navy);
+  box-shadow: 0 2px 8px rgba(25, 72, 106, 0.25);
+}
+
+.filter-btn .count-tag {
+  opacity: 0.65;
+  margin-left: 6px;
+  font-size: 11px;
+}
+
+.keyboard-legend {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.kbd-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--ink-secondary);
+}
+
+/* ==========================================================================
+   MAIN QUIZ CARD AREA
+   ========================================================================== */
+.quiz-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 40px 48px;
+  position: relative;
+  box-shadow: var(--panel-shadow);
+}
+
+/* Level Indicator Badge */
+.level-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.level-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid transparent;
+}
+
+.level-tag::before {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+}
+
+.level-tag.lvl-Easy {
+  background: var(--ok-bg);
+  color: var(--ok);
+  border-color: var(--ok-border);
+}
+.level-tag.lvl-Easy::before { background: var(--ok); }
+
+.level-tag.lvl-Medium {
+  background: var(--gold-bg);
+  color: var(--gold);
+  border-color: var(--gold);
+}
+.level-tag.lvl-Medium::before { background: var(--gold); }
+
+.level-tag.lvl-Hard {
+  background: var(--bad-bg);
+  color: var(--bad);
+  border-color: var(--bad-border);
+}
+.level-tag.lvl-Hard::before { background: var(--bad); }
+
+.sub-meta {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.1em;
+}
+
+/* Question Headline */
+.question-title {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.2vw, 42px);
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  min-height: 2.5em;
+  display: flex;
+  align-items: center;
+}
+
+/* ==========================================================================
+   OPTIONS LIST (SHARP ARCHITECTURAL TILES)
+   ========================================================================== */
+.options-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.option-btn {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  text-align: left;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 18px 24px;
+  color: var(--ink);
+  font-family: var(--font-main);
+  font-size: clamp(17px, 1.6vw, 21px);
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  user-select: none;
+  box-shadow: 0 1px 3px rgba(60, 45, 30, 0.04);
+}
+
+.option-btn::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 0;
+  background: var(--sdg17-navy);
+  transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.option-btn:hover:not(:disabled) {
+  background: var(--surface-hover);
+  border-color: var(--sdg17-navy);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px rgba(60, 45, 30, 0.08);
+}
+
+.option-btn:hover:not(:disabled)::before {
+  width: 4px;
+}
+
+.option-btn:focus-visible {
+  outline: 2px solid var(--border-accent);
+  outline-offset: 2px;
+}
+
+.option-btn:disabled {
+  cursor: default;
+}
+
+/* Letter Indicator Box (A, B, C, D) */
+.option-key {
+  width: 36px;
+  height: 36px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  color: var(--ink-secondary);
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.option-btn:hover:not(:disabled) .option-key {
+  border-color: var(--sdg17-navy);
+  color: var(--sdg17-navy);
+  background: #FFFFFF;
+}
+
+.option-text {
+  line-height: 1.35;
+}
+
+/* Result Verification States */
+.option-status-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  display: none;
+  align-items: center;
+  gap: 6px;
+}
+
+.option-btn.state-correct {
+  background: var(--ok-bg) !important;
+  border-color: var(--ok-border) !important;
+  color: var(--ok) !important;
+}
+.option-btn.state-correct::before {
+  width: 6px;
+  background: var(--ok);
+}
+.option-btn.state-correct .option-key {
+  background: var(--ok);
+  color: #FFFFFF;
+  border-color: var(--ok);
+}
+.option-btn.state-correct .option-status-tag {
+  display: inline-flex;
+  background: var(--ok);
+  color: #FFFFFF;
+}
+
+.option-btn.state-wrong {
+  background: var(--bad-bg) !important;
+  border-color: var(--bad-border) !important;
+  color: var(--bad) !important;
+}
+.option-btn.state-wrong::before {
+  width: 6px;
+  background: var(--bad);
+}
+.option-btn.state-wrong .option-key {
+  background: var(--bad);
+  color: #FFFFFF;
+  border-color: var(--bad);
+}
+.option-btn.state-wrong .option-status-tag {
+  display: inline-flex;
+  background: var(--bad);
+  color: #FFFFFF;
+}
+
+.option-btn.state-dim {
+  opacity: 0.38;
+}
+
+/* ==========================================================================
+   FEEDBACK EXPLANATION DRAWER
+   ========================================================================== */
+.feedback-box {
+  display: none;
+  border-left: 4px solid var(--border);
+  padding: 22px 28px;
+  background: var(--surface-alt);
+  border-top: 1px solid var(--border);
+  border-right: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+
+.feedback-box.show {
+  display: block;
+}
+
+.feedback-box.state-correct {
+  border: 1px solid rgba(22, 163, 74, 0.3);
+  border-left: 4px solid var(--ok);
+  background: var(--ok-bg);
+}
+
+.feedback-box.state-wrong {
+  border: 1px solid rgba(225, 29, 72, 0.3);
+  border-left: 4px solid var(--bad);
+  background: var(--bad-bg);
+}
+
+.feedback-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.feedback-box.state-correct .feedback-title {
+  color: var(--ok);
+}
+
+.feedback-box.state-wrong .feedback-title {
+  color: var(--bad);
+}
+
+.feedback-content {
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.feedback-content strong {
+  color: var(--ink);
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   FOOTER CONTROLS & SUBMIT ACTION
+   ========================================================================== */
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-top: 10px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+
+.action-hint {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--ink-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.btn-primary {
+  background: var(--sdg17-navy);
+  color: #FFFFFF;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--btn-shadow);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--sdg17-light);
+  border-color: var(--sdg17-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(25, 72, 106, 0.4);
+}
+
+.btn-primary:focus-visible {
+  outline: 2px solid var(--border-accent);
+  outline-offset: 3px;
+}
+
+.btn-primary:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==========================================================================
+   END OF QUIZ / EXECUTIVE SUMMARY VIEW
+   ========================================================================== */
+.end-panel {
+  display: none;
+  flex-direction: column;
+  gap: 36px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 56px 64px;
+  position: relative;
+  box-shadow: var(--panel-shadow);
+}
+
+.end-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.end-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--sdg17-bright);
+  text-transform: uppercase;
+}
+
+.end-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 68px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: var(--ink);
+}
+
+.end-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.stat-card {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.stat-card-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.stat-card-value {
+  font-family: var(--font-display);
+  font-size: clamp(40px, 4.5vw, 56px);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.stat-card-value.brand {
+  color: var(--sdg17-bright);
+}
+
+.stat-card-desc {
+  font-size: 13px;
+  color: var(--ink-secondary);
+}
+
+.end-assessment {
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--sdg17-navy);
+  padding: 24px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.assessment-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  color: var(--sdg17-bright);
+  text-transform: uppercase;
+}
+
+.assessment-text {
+  font-size: clamp(17px, 1.6vw, 22px);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.4;
+}
+
+.end-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   RESPONSIVE OPTIMIZATION
+   ========================================================================== */
+@media (max-width: 900px) {
+  .app-container {
+    padding: 20px 16px 36px;
+    gap: 20px;
+  }
+  .quiz-panel, .end-panel {
+    padding: 28px 20px;
+    gap: 22px;
+  }
+  .metrics-strip {
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .progress-rail {
+    grid-column: span 2;
+  }
+  .option-btn {
+    padding: 14px 16px;
+    gap: 14px;
+  }
+  .action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .btn-primary {
+    justify-content: center;
+    width: 100%;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- Top Navigation & Brand Header -->
+  <header class="brand-header crosshair-corner">
+    <div class="brand-meta">
+      <div class="sdg-badge">
+        <span></span> SDG 17
+      </div>
+      <div class="brand-title">
+        <h1>PARTNERSHIPS FOR THE GOALS</h1>
+        <p>Official Agenda 2030 Executive Assessment</p>
+      </div>
+    </div>
+    
+    <div class="header-controls">
+      <button class="btn-icon" id="btnSound" aria-label="Toggle Audio Effects">
+        <span id="soundIcon">AUDIO [ON]</span>
+      </button>
+      <button class="btn-icon" id="btnTheme" aria-label="Toggle Theme">
+        <span id="themeIcon">THEME [CREAM / WHITE]</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Metrics & Real-Time Telemetry Bar -->
+  <section class="metrics-strip crosshair-corner" aria-label="Quiz Telemetry">
+    <div class="metric-cell">
+      <span class="metric-label">PROGRESS</span>
+      <span class="metric-value highlight" id="counterDisplay">01 / 25</span>
+    </div>
+
+    <div class="progress-rail" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="progress-fill" id="progressBar"></div>
+    </div>
+
+    <div class="metric-cell">
+      <span class="metric-label">SCORE</span>
+      <span class="metric-value" id="scoreDisplay">00</span>
+    </div>
+
+    <div class="metric-cell">
+      <span class="metric-label">ACCURACY</span>
+      <span class="metric-value" id="accuracyDisplay">100%</span>
+    </div>
+  </section>
+
+  <!-- Difficulty Segmented Switcher & Keyboard Shortcut Legend -->
+  <section class="filter-bar">
+    <div class="filter-group" id="difficultyGroup" role="tablist" aria-label="Question Difficulty Filter">
+      <!-- Generated via JS -->
+    </div>
+    
+    <div class="keyboard-legend">
+      <span>SHORTCUTS:</span>
+      <span><span class="kbd-chip">1-4</span> SELECT OPTION</span>
+      <span><span class="kbd-chip">ENTER</span> NEXT</span>
+    </div>
+  </section>
+
+  <!-- Interactive Question Arena -->
+  <main class="quiz-panel crosshair-corner" id="quizPanel">
+    <div class="level-strip">
+      <span class="level-tag" id="levelBadge">EASY</span>
+      <span class="sub-meta" id="targetRef">UN SDG TARGET 17 // MEANS OF IMPLEMENTATION</span>
+    </div>
+
+    <h2 class="question-title" id="questionText">Loading assessment question...</h2>
+
+    <div class="options-grid" id="optionsContainer" role="radiogroup" aria-label="Question Answers">
+      <!-- Options rendered dynamically -->
+    </div>
+
+    <div class="feedback-box" id="feedbackBox" role="status" aria-live="polite">
+      <div class="feedback-title" id="feedbackTitle">SYSTEM VERIFICATION</div>
+      <div class="feedback-content" id="feedbackText"></div>
+    </div>
+
+    <div class="action-bar">
+      <div class="action-hint">
+        <span>PRESS KEY <span class="kbd-chip">1</span>–<span class="kbd-chip">4</span> TO RESPOND</span>
+      </div>
+      <button class="btn-primary" id="btnNext" disabled>
+        <span>CONTINUE ASSESSMENT</span>
+        <span>→</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- Final Results & Performance Report -->
+  <section class="end-panel crosshair-corner" id="endPanel">
+    <div class="end-header">
+      <span class="end-label">ASSESSMENT COMPLETE // EXECUTIVE AUDIT</span>
+      <h2 class="end-title" id="endGreeting">Performance Evaluation</h2>
+    </div>
+
+    <div class="end-stats-grid">
+      <div class="stat-card">
+        <span class="stat-card-title">FINAL SCORE</span>
+        <div class="stat-card-value brand" id="endFinalScore">0 / 0</div>
+        <span class="stat-card-desc">Total verified correct answers</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-card-title">ACCURACY RATE</span>
+        <div class="stat-card-value" id="endFinalPercent">0%</div>
+        <span class="stat-card-desc">Overall mastery coefficient</span>
+      </div>
+
+      <div class="stat-card">
+        <span class="stat-card-title">CATEGORY RATING</span>
+        <div class="stat-card-value" id="endRatingTier" style="font-size: 28px;">DISTINCTION</div>
+        <span class="stat-card-desc">SDG 17 Knowledge Index</span>
+      </div>
+    </div>
+
+    <div class="end-assessment">
+      <span class="assessment-title">POLICY & PARTNERSHIP BRIEF</span>
+      <p class="assessment-text" id="endMessage"></p>
+    </div>
+
+    <div class="end-actions">
+      <button class="btn-primary" id="btnRestart">
+        <span>RESTART EVALUATION</span>
+        <span>↺</span>
+      </button>
+      <button class="btn-icon" id="btnFilterAll">
+        <span>ALL QUESTIONS</span>
+      </button>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ==========================================================================
+   UN SDG 17 KNOWLEDGE REPOSITORY (CURATED DATASET)
+   ========================================================================== */
+var QUESTIONS_DATA = [
+  {l:"Easy",q:"How many Sustainable Development Goals are there?",o:["10","17","25","30"],a:1,e:"There are 17 SDGs adopted by all UN Member States, supported by 169 specific global targets."},
+  {l:"Easy",q:"What is the theme of SDG 17?",o:["Clean water and sanitation","Climate action","Partnerships for the Goals","Quality education"],a:2,e:"SDG 17 focuses on strengthening the means of implementation and revitalizing the Global Partnership for Sustainable Development."},
+  {l:"Easy",q:"In which year did the UN adopt the SDGs?",o:["2000","2010","2015","2020"],a:2,e:"The 2030 Agenda for Sustainable Development was unanimously adopted at the UN Summit in September 2015."},
+  {l:"Easy",q:"By which year should the SDGs be achieved?",o:["2025","2028","2035","2030"],a:3,e:"The global framework is designated as the 2030 Agenda, setting 2030 as the universal achievement milestone."},
+  {l:"Easy",q:"Which organization created the SDGs?",o:["WHO","World Bank","United Nations","WTO"],a:2,e:"All 193 United Nations Member States collectively negotiated and ratified the 17 Global Goals."},
+  {l:"Easy",q:"What is the main idea of SDG 17?",o:["Countries should work alone","Countries and groups should work together","Only rich countries should act","Only governments should act"],a:1,e:"SDG 17 recognizes that goals can only be realized with strong global partnerships and cooperation across public, private, and civil sectors."},
+  {l:"Easy",q:"What does “Swachh Bharat” mean?",o:["Healthy India","Clean India","Digital India","Strong India"],a:1,e:"Swachh Bharat Abhiyan translates directly to Clean India Mission, a nationwide multi-stakeholder sanitation campaign."},
+  {l:"Easy",q:"Which of these is a key area of SDG 17?",o:["Space tourism","Technology sharing","Fashion design","Sports events"],a:1,e:"Technology sharing and transfer is one of the five pillar areas of SDG 17, alongside finance, capacity-building, trade, and systemic issues."},
+  {l:"Medium",q:"Which of these is NOT one of the five key areas of SDG 17?",o:["Finance","Weather forecasting","Capacity building","Trade"],a:1,e:"The 5 official structural pillars of SDG 17 are Finance, Technology, Capacity-Building, Trade, and Systemic Issues (policy/data)."},
+  {l:"Medium",q:"Which partnership shared COVID-19 vaccines with low-income countries?",o:["COVAX","ISA","NITI Aayog","UNDP Goals"],a:0,e:"COVAX was co-led by CEPI, Gavi, and WHO alongside delivery partner UNICEF to guarantee equitable global vaccine distribution."},
+  {l:"Medium",q:"The International Solar Alliance was started by India and which other country?",o:["Germany","Japan","Brazil","France"],a:3,e:"The International Solar Alliance (ISA) was jointly founded by India and France at COP21 in Paris in 2015."},
+  {l:"Medium",q:"In which year was Swachh Bharat Abhiyan launched?",o:["2010","2014","2016","2019"],a:1,e:"The mission was inaugurated on 2 October 2014 to mark the 145th birth anniversary of Mahatma Gandhi."},
+  {l:"Medium",q:"Swachh Bharat mainly supports which SDG on sanitation?",o:["SDG 2","SDG 4","SDG 6","SDG 13"],a:2,e:"SDG 6 is Clean Water and Sanitation. Swachh Bharat leveraged cross-sector partnerships, directly exemplifying SDG 17 in action."},
+  {l:"Medium",q:"Which stakeholder supports development projects through CSR funding?",o:["Private sector","Courts","Armed forces","Election Commission"],a:0,e:"The private sector commits Corporate Social Responsibility (CSR) capital to fund environmental, educational, and public health projects."},
+  {l:"Medium",q:"What does “capacity building” mean?",o:["Building roads and bridges","Raising import taxes","Training and developing skills","Printing more currency"],a:2,e:"Capacity-building refers to institutional strengthening, technical skills transfer, and human resource training in developing nations."},
+  {l:"Medium",q:"What does UNDP stand for?",o:["United Nations Digital Partnership","United Nations Development Programme","Universal Network for Development Planning","United Nations Data Platform"],a:1,e:"UNDP stands for the United Nations Development Programme, operating in nearly 170 countries to eradicate poverty and support SDGs."},
+  {l:"Medium",q:"What is the “digital divide”?",o:["A broken computer","A type of software","A tax on technology","The gap between people with and without internet access"],a:3,e:"The digital divide is the economic and social inequality between communities with access to information technology and those without."},
+  {l:"Hard",q:"What is the UN target for official development assistance (ODA) as a share of donor countries’ income?",o:["0.1%","0.3%","0.7%","1.5%"],a:2,e:"Target 17.2 commits developed countries to achieve the target of 0.7% of Gross National Income (GNI) for Official Development Assistance (ODA)."},
+  {l:"Hard",q:"By how much did ODA fall in 2025, according to the UN SDG Report 2026?",o:["2.3%","7.1%","23.1%","41%"],a:2,e:"Global Official Development Assistance contracted sharply by 23.1% in 2025, marking an alarming shortfall in international financing for development."},
+  {l:"Hard",q:"How many targets does SDG 17 have?",o:["8","12","19","169"],a:2,e:"SDG 17 contains 19 specific targets across finance, technology, capacity building, trade, and systemic issues (the highest of any individual SDG)."},
+  {l:"Hard",q:"In 2025, ODA was what share of donor countries’ combined income?",o:["0.07%","0.26%","0.45%","0.70%"],a:1,e:"Combined DAC donor ODA stood at only 0.26% of donor GNI, significantly below the internationally agreed 0.70% United Nations benchmark."},
+  {l:"Hard",q:"By about how much has internet use increased since 2015, according to the UN SDG Report 2025?",o:["7%","17%","70%","170%"],a:2,e:"Global internet connectivity expanded by approximately 70% between 2015 and 2025, though severe rural and regional connectivity gaps persist."},
+  {l:"Hard",q:"Funding for data and statistics in developing countries in 2023 was about:",o:["$114 million","$1.14 billion","$11.4 billion","$114 billion"],a:1,e:"Statistical funding reached approximately $1.14 billion in 2023, representing a 57% increase relative to 2015 baseline levels."},
+  {l:"Hard",q:"What was the total ODA from DAC countries in 2025?",o:["$17.4 billion","$74.3 billion","$174.3 billion","$743 billion"],a:2,e:"Total Official Development Assistance from OECD Development Assistance Committee (DAC) members stood at $174.3 billion in 2025."},
+  {l:"Hard",q:"Which UN document sets out the 17 SDGs?",o:["Paris Agreement","Kyoto Protocol","2030 Agenda for Sustainable Development","Montreal Protocol"],a:2,e:"The SDGs were formally adopted under UN General Assembly Resolution 70/1: 'Transforming our world: the 2030 Agenda for Sustainable Development'."}
+];
+
+/* ==========================================================================
+   WEB AUDIO API SYNTHESIZER (CRISP TACTILE FEEDBACK, ZERO EXTERNAL ASSETS)
+   ========================================================================== */
+var SoundEngine = (function() {
+  var ctx = null;
+  var enabled = true;
+
+  function getCtx() {
+    if (!ctx) {
+      var AudioContext = window.AudioContext || window.webkitAudioContext;
+      if (AudioContext) ctx = new AudioContext();
+    }
+    if (ctx && ctx.state === 'suspended') {
+      ctx.resume();
+    }
+    return ctx;
+  }
+
+  return {
+    toggle: function() {
+      enabled = !enabled;
+      return enabled;
+    },
+    isEnabled: function() { return enabled; },
+    playClick: function() {
+      if (!enabled) return;
+      var c = getCtx();
+      if (!c) return;
+      var osc = c.createOscillator();
+      var gain = c.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(800, c.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(400, c.currentTime + 0.04);
+      gain.gain.setValueAtTime(0.08, c.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, c.currentTime + 0.04);
+      osc.connect(gain);
+      gain.connect(c.destination);
+      osc.start();
+      osc.stop(c.currentTime + 0.045);
+    },
+    playCorrect: function() {
+      if (!enabled) return;
+      var c = getCtx();
+      if (!c) return;
+      var now = c.currentTime;
+      [523.25, 659.25, 783.99].forEach(function(freq, idx) {
+        var osc = c.createOscillator();
+        var gain = c.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.07);
+        gain.gain.setValueAtTime(0.12, now + idx * 0.07);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.07 + 0.35);
+        osc.connect(gain);
+        gain.connect(c.destination);
+        osc.start(now + idx * 0.07);
+        osc.stop(now + idx * 0.07 + 0.38);
+      });
+    },
+    playWrong: function() {
+      if (!enabled) return;
+      var c = getCtx();
+      if (!c) return;
+      var now = c.currentTime;
+      var osc = c.createOscillator();
+      var gain = c.createGain();
+      osc.type = 'sawtooth';
+      osc.frequency.setValueAtTime(140, now);
+      osc.frequency.exponentialRampToValueAtTime(80, now + 0.22);
+      gain.gain.setValueAtTime(0.1, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+      osc.connect(gain);
+      gain.connect(c.destination);
+      osc.start(now);
+      osc.stop(now + 0.23);
+    },
+    playFinish: function() {
+      if (!enabled) return;
+      var c = getCtx();
+      if (!c) return;
+      var now = c.currentTime;
+      [440, 554.37, 659.25, 880].forEach(function(freq, idx) {
+        var osc = c.createOscillator();
+        var gain = c.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.09);
+        gain.gain.setValueAtTime(0.14, now + idx * 0.09);
+        gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.09 + 0.5);
+        osc.connect(gain);
+        gain.connect(c.destination);
+        osc.start(now + idx * 0.09);
+        osc.stop(now + idx * 0.09 + 0.55);
+      });
+    }
+  };
+})();
+
+/* ==========================================================================
+   APPLICATION STATE & CONTROLLER
+   ========================================================================== */
+var state = {
+  currentFilter: 'All',
+  activeQuestions: QUESTIONS_DATA.slice(),
+  currentIndex: 0,
+  score: 0,
+  answered: false,
+  userResponses: []
+};
+
+var DOM = {
+  btnSound: document.getElementById('btnSound'),
+  soundIcon: document.getElementById('soundIcon'),
+  btnTheme: document.getElementById('btnTheme'),
+  themeIcon: document.getElementById('themeIcon'),
+  counterDisplay: document.getElementById('counterDisplay'),
+  progressBar: document.getElementById('progressBar'),
+  scoreDisplay: document.getElementById('scoreDisplay'),
+  accuracyDisplay: document.getElementById('accuracyDisplay'),
+  difficultyGroup: document.getElementById('difficultyGroup'),
+  quizPanel: document.getElementById('quizPanel'),
+  levelBadge: document.getElementById('levelBadge'),
+  targetRef: document.getElementById('targetRef'),
+  questionText: document.getElementById('questionText'),
+  optionsContainer: document.getElementById('optionsContainer'),
+  feedbackBox: document.getElementById('feedbackBox'),
+  feedbackTitle: document.getElementById('feedbackTitle'),
+  feedbackText: document.getElementById('feedbackText'),
+  btnNext: document.getElementById('btnNext'),
+  endPanel: document.getElementById('endPanel'),
+  endGreeting: document.getElementById('endGreeting'),
+  endFinalScore: document.getElementById('endFinalScore'),
+  endFinalPercent: document.getElementById('endFinalPercent'),
+  endRatingTier: document.getElementById('endRatingTier'),
+  endMessage: document.getElementById('endMessage'),
+  btnRestart: document.getElementById('btnRestart'),
+  btnFilterAll: document.getElementById('btnFilterAll')
+};
+
+/* Format Number with Leading Zero */
+function pad2(num) {
+  return num < 10 ? '0' + num : '' + num;
+}
+
+/* ==========================================================================
+   RENDER & GSAP ANIMATIONS
+   ========================================================================== */
+function initDifficultyFilters() {
+  DOM.difficultyGroup.innerHTML = '';
+  var tiers = ['All', 'Easy', 'Medium', 'Hard'];
+  tiers.forEach(function(tier) {
+    var count = tier === 'All' 
+      ? QUESTIONS_DATA.length 
+      : QUESTIONS_DATA.filter(function(x) { return x.l === tier; }).length;
+
+    var btn = document.createElement('button');
+    btn.className = 'filter-btn';
+    btn.setAttribute('role', 'tab');
+    btn.setAttribute('data-tier', tier);
+    btn.setAttribute('aria-pressed', tier === state.currentFilter ? 'true' : 'false');
+    btn.innerHTML = tier + ' <span class="count-tag">[' + count + ']</span>';
+    btn.onclick = function() {
+      SoundEngine.playClick();
+      setDifficulty(tier);
+    };
+    DOM.difficultyGroup.appendChild(btn);
+  });
+}
+
+function setDifficulty(tier) {
+  state.currentFilter = tier;
+  state.activeQuestions = tier === 'All'
+    ? QUESTIONS_DATA.slice()
+    : QUESTIONS_DATA.filter(function(x) { return x.l === tier; });
+  
+  state.currentIndex = 0;
+  state.score = 0;
+  state.userResponses = [];
+
+  // Update tabs
+  var tabs = DOM.difficultyGroup.children;
+  for (var i = 0; i < tabs.length; i++) {
+    tabs[i].setAttribute('aria-pressed', tabs[i].getAttribute('data-tier') === tier ? 'true' : 'false');
+  }
+
+  DOM.endPanel.style.display = 'none';
+  DOM.quizPanel.style.display = 'flex';
+
+  renderQuestion();
+}
+
+function renderQuestion() {
+  state.answered = false;
+  var q = state.activeQuestions[state.currentIndex];
+  var total = state.activeQuestions.length;
+
+  // Header & Counters
+  DOM.counterDisplay.textContent = pad2(state.currentIndex + 1) + ' / ' + pad2(total);
+  DOM.scoreDisplay.textContent = pad2(state.score);
+
+  var currentAccuracy = state.currentIndex === 0 
+    ? 100 
+    : Math.round((state.score / state.currentIndex) * 100);
+  DOM.accuracyDisplay.textContent = currentAccuracy + '%';
+
+  // Animate Progress Bar via GSAP
+  var targetPct = (state.currentIndex / total) * 100;
+  if (window.gsap) {
+    gsap.to(DOM.progressBar, {
+      width: targetPct + '%',
+      duration: 0.4,
+      ease: 'power2.out'
+    });
+  } else {
+    DOM.progressBar.style.width = targetPct + '%';
+  }
+
+  // Level Badge
+  DOM.levelBadge.textContent = q.l.toUpperCase();
+  DOM.levelBadge.className = 'level-tag lvl-' + q.l;
+  DOM.targetRef.textContent = 'UN SDG TARGET 17 // ' + (q.l === 'Hard' ? 'SYSTEMIC & DATA RIGOR' : q.l === 'Medium' ? 'CAPACITY & MULTI-STAKEHOLDER' : 'GLOBAL FRAMEWORK');
+
+  // Text Content
+  DOM.questionText.textContent = q.q;
+
+  // Reset Feedback and Next Button
+  DOM.feedbackBox.className = 'feedback-box';
+  DOM.btnNext.disabled = true;
+  DOM.btnNext.querySelector('span:first-child').textContent = state.currentIndex === total - 1 
+    ? 'GENERATE AUDIT REPORT' 
+    : 'CONTINUE ASSESSMENT';
+
+  // Ensure options container and question text are clean, active, and fully visible
+  if (window.gsap) {
+    gsap.killTweensOf([DOM.optionsContainer, DOM.questionText, DOM.feedbackBox]);
+    gsap.set(DOM.optionsContainer, { clearProps: 'opacity,transform,visibility' });
+    gsap.set(DOM.questionText, { clearProps: 'opacity,transform' });
+  }
+  DOM.optionsContainer.style.opacity = '1';
+  DOM.optionsContainer.style.transform = 'none';
+  DOM.optionsContainer.style.display = 'flex';
+
+  // Render Options
+  DOM.optionsContainer.innerHTML = '';
+  var keys = ['A', 'B', 'C', 'D'];
+
+  q.o.forEach(function(optText, optIdx) {
+    var btn = document.createElement('button');
+    btn.className = 'option-btn';
+    btn.setAttribute('role', 'radio');
+    btn.setAttribute('aria-checked', 'false');
+    btn.setAttribute('data-index', optIdx);
+
+    btn.innerHTML = 
+      '<div class="option-key">' + keys[optIdx] + '</div>' +
+      '<div class="option-text">' + optText + '</div>' +
+      '<div class="option-status-tag"></div>';
+
+    btn.onclick = function() {
+      selectAnswer(optIdx);
+    };
+
+    DOM.optionsContainer.appendChild(btn);
+  });
+
+  // GSAP Entrance Choreography
+  if (window.gsap) {
+    var tl = gsap.timeline();
+    tl.fromTo(DOM.levelBadge, 
+      { opacity: 0, y: -8 }, 
+      { opacity: 1, y: 0, duration: 0.25, ease: 'power2.out' }
+    );
+    tl.fromTo(DOM.questionText, 
+      { opacity: 0, y: 12 }, 
+      { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }, 
+      "-=0.15"
+    );
+    tl.fromTo(DOM.optionsContainer.children, 
+      { opacity: 0, x: -16 }, 
+      { opacity: 1, x: 0, stagger: 0.05, duration: 0.28, ease: 'power3.out', clearProps: 'transform' }, 
+      "-=0.2"
+    );
+  }
+}
+
+function selectAnswer(selectedIdx) {
+  if (state.answered) return;
+  state.answered = true;
+
+  var q = state.activeQuestions[state.currentIndex];
+  var isCorrect = selectedIdx === q.a;
+  var options = DOM.optionsContainer.children;
+
+  if (isCorrect) {
+    state.score++;
+    SoundEngine.playCorrect();
+  } else {
+    SoundEngine.playWrong();
+  }
+
+  // Update Metric Display
+  DOM.scoreDisplay.textContent = pad2(state.score);
+  var currentAccuracy = Math.round((state.score / (state.currentIndex + 1)) * 100);
+  DOM.accuracyDisplay.textContent = currentAccuracy + '%';
+
+  // Record Response
+  state.userResponses.push({
+    question: q.q,
+    chosen: selectedIdx,
+    correct: q.a,
+    isCorrect: isCorrect
+  });
+
+  // Apply Visual States to Options
+  for (var i = 0; i < options.length; i++) {
+    var btn = options[i];
+    btn.disabled = true;
+    var tag = btn.querySelector('.option-status-tag');
+
+    if (i === q.a) {
+      btn.classList.add('state-correct');
+      tag.textContent = 'VERIFIED ✓';
+    } else if (i === selectedIdx) {
+      btn.classList.add('state-wrong');
+      tag.textContent = 'INCORRECT ✕';
+    } else {
+      btn.classList.add('state-dim');
+    }
+  }
+
+  // GSAP Micro-Interactions on Options
+  if (window.gsap) {
+    var pickedEl = options[selectedIdx];
+    if (isCorrect) {
+      gsap.fromTo(pickedEl, 
+        { scale: 0.985 }, 
+        { scale: 1, duration: 0.2, ease: 'power2.out' }
+      );
+    } else {
+      // Crisp shake animation for incorrect response
+      gsap.to(pickedEl, {
+        x: 8,
+        duration: 0.08,
+        repeat: 3,
+        yoyo: true,
+        ease: 'power1.inOut',
+        onComplete: function() {
+          gsap.set(pickedEl, { x: 0 });
+        }
+      });
+    }
+  }
+
+  // Populate & Animate Feedback Drawer
+  DOM.feedbackBox.className = 'feedback-box show ' + (isCorrect ? 'state-correct' : 'state-wrong');
+  DOM.feedbackTitle.textContent = isCorrect 
+    ? 'VALIDATED // OFFICIAL ACCORDANCE' 
+    : 'DISCREPANCY // SYSTEM CLARIFICATION';
+
+  DOM.feedbackText.innerHTML = isCorrect
+    ? q.e
+    : '<strong>Correct Accord: ' + q.o[q.a] + '.</strong> ' + q.e;
+
+  if (window.gsap) {
+    gsap.fromTo(DOM.feedbackBox, 
+      { opacity: 0, y: 14 }, 
+      { opacity: 1, y: 0, duration: 0.35, ease: 'power2.out' }
+    );
+    gsap.fromTo(DOM.btnNext, 
+      { scale: 0.96 }, 
+      { scale: 1, duration: 0.25, ease: 'back.out(2)' }
+    );
+  }
+
+  DOM.btnNext.disabled = false;
+  DOM.btnNext.focus();
+}
+
+function handleNext() {
+  if (!state.answered) return;
+  SoundEngine.playClick();
+
+  if (state.currentIndex < state.activeQuestions.length - 1) {
+    // GSAP Question Exit Transition: animate individual option buttons, never hide the parent container
+    var exitTargets = [DOM.questionText, DOM.feedbackBox];
+    var currentBtns = DOM.optionsContainer.querySelectorAll('.option-btn');
+    if (currentBtns.length > 0) {
+      exitTargets.push(currentBtns);
+    }
+
+    if (window.gsap) {
+      gsap.to(exitTargets, {
+        opacity: 0,
+        y: -10,
+        duration: 0.2,
+        ease: 'power2.in',
+        onComplete: function() {
+          state.currentIndex++;
+          renderQuestion();
+        }
+      });
+    } else {
+      state.currentIndex++;
+      renderQuestion();
+    }
+  } else {
+    showResults();
+  }
+}
+
+function showResults() {
+  SoundEngine.playFinish();
+
+  // Fill Progress to 100%
+  if (window.gsap) {
+    gsap.to(DOM.progressBar, { width: '100%', duration: 0.4 });
+  } else {
+    DOM.progressBar.style.width = '100%';
+  }
+
+  DOM.quizPanel.style.display = 'none';
+  DOM.endPanel.style.display = 'flex';
+
+  var total = state.activeQuestions.length;
+  var pct = Math.round((state.score / total) * 100);
+
+  DOM.endFinalScore.textContent = state.score + ' / ' + total;
+  DOM.endFinalPercent.textContent = pct + '%';
+
+  // Evaluate Distinction Tier
+  var tierTitle = '';
+  var message = '';
+
+  if (pct >= 90) {
+    tierTitle = 'EXECUTIVE AMBASSADOR';
+    message = 'Mastery demonstrated. You possess high-level strategic awareness of the 17 SDG targets, ODA finance flows, multilateral capacity-building initiatives, and UN global partnership architecture.';
+  } else if (pct >= 70) {
+    tierTitle = 'SENIOR PRACTITIONER';
+    message = 'Strong foundation. You demonstrate command of core SDG 17 concepts, international alliances such as ISA & COVAX, and implementation mechanisms. Minor policy nuances warrant review.';
+  } else if (pct >= 50) {
+    tierTitle = 'POLICY ASSOCIATE';
+    message = 'Developing literacy. Core awareness of Swachh Bharat and UN frameworks is evident. Further study of official ODA aid targets and multi-stakeholder financing is recommended.';
+  } else {
+    tierTitle = 'INDUCTION LEVEL';
+    message = 'Preliminary awareness. Revitalizing the Global Partnership requires collective knowledge. Explore the UN 2030 Agenda documentation and retake the evaluation.';
+  }
+
+  DOM.endRatingTier.textContent = tierTitle;
+  DOM.endMessage.textContent = message;
+
+  // GSAP Results Reveal Animation
+  if (window.gsap) {
+    var tl = gsap.timeline();
+    tl.fromTo(DOM.endPanel, 
+      { opacity: 0, y: 20 }, 
+      { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out' }
+    );
+    tl.fromTo('.stat-card', 
+      { opacity: 0, y: 16 }, 
+      { opacity: 1, y: 0, stagger: 0.08, duration: 0.35, ease: 'power2.out' }, 
+      "-=0.2"
+    );
+    tl.fromTo('.end-assessment', 
+      { opacity: 0, x: -12 }, 
+      { opacity: 1, x: 0, duration: 0.35, ease: 'power2.out' }, 
+      "-=0.1"
+    );
+  }
+}
+
+/* ==========================================================================
+   EVENT LISTENERS & KEYBOARD ACCESSIBILITY
+   ========================================================================== */
+DOM.btnNext.onclick = handleNext;
+
+DOM.btnRestart.onclick = function() {
+  SoundEngine.playClick();
+  setDifficulty(state.currentFilter);
+};
+
+DOM.btnFilterAll.onclick = function() {
+  SoundEngine.playClick();
+  setDifficulty('All');
+};
+
+DOM.btnSound.onclick = function() {
+  var isNowOn = SoundEngine.toggle();
+  DOM.soundIcon.textContent = isNowOn ? 'AUDIO [ON]' : 'AUDIO [OFF]';
+  if (isNowOn) SoundEngine.playClick();
+};
+
+DOM.btnTheme.onclick = function() {
+  SoundEngine.playClick();
+  var root = document.documentElement;
+  var currentTheme = root.getAttribute('data-theme') || 'light';
+  var newTheme = currentTheme === 'light' ? 'dark' : 'light';
+  root.setAttribute('data-theme', newTheme);
+  DOM.themeIcon.textContent = newTheme === 'light' ? 'THEME [CREAM / WHITE]' : 'THEME [DARK]';
+};
+
+/* Keyboard Navigation (1-4 for options, Enter for next/restart) */
+document.addEventListener('keydown', function(e) {
+  // If at results screen
+  if (DOM.quizPanel.style.display === 'none') {
+    if (e.key === 'Enter') {
+      DOM.btnRestart.click();
+    }
+    return;
+  }
+
+  // Option select via Keys 1–4
+  if (e.key >= '1' && e.key <= '4') {
+    var index = parseInt(e.key, 10) - 1;
+    var options = DOM.optionsContainer.children;
+    if (options[index] && !state.answered) {
+      selectAnswer(index);
+    }
+  } else if (e.key === 'Enter' || e.key === 'ArrowRight') {
+    if (state.answered) {
+      e.preventDefault();
+      handleNext();
+    }
+  }
+});
+
+/* ==========================================================================
+   INITIALIZATION
+   ========================================================================== */
+initDifficultyFilters();
+setDifficulty('All');
+</script>
+</body>
+</html>
